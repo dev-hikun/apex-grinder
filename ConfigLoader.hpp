@@ -19,6 +19,7 @@ struct ConfigLoader {
     //features
     bool FEATURE_AIMBOT_ON = true;
     bool FEATURE_SENSE_ON = true;
+    bool FEATURE_LOBA_ON = true;
     bool FEATURE_SPECTATOR_ON = true;
     bool FEATURE_QUICKTURN_ON = true;
     bool FEATURE_SKINCHANGER_ON = true;
@@ -70,6 +71,7 @@ struct ConfigLoader {
         //features
         FEATURE_AIMBOT_ON = (key.compare("FEATURE_AIMBOT_ON") != 0) ? FEATURE_AIMBOT_ON : toBool(val);
         FEATURE_SENSE_ON = (key.compare("FEATURE_SENSE_ON") != 0) ? FEATURE_SENSE_ON : toBool(val);
+        FEATURE_LOBA_ON = (key.compare("FEATURE_LOBA_ON") != 0) ? FEATURE_LOBA_ON : toBool(val);
         FEATURE_TRIGGERBOT_ON = (key.compare("FEATURE_TRIGGERBOT_ON") != 0) ? FEATURE_TRIGGERBOT_ON : toBool(val);
         FEATURE_NORECOIL_ON = (key.compare("FEATURE_NORECOIL_ON") != 0) ? FEATURE_NORECOIL_ON : toBool(val);
         FEATURE_RADAR_ON = (key.compare("FEATURE_RADAR_ON") != 0) ? FEATURE_RADAR_ON : toBool(val);
@@ -118,6 +120,7 @@ struct ConfigLoader {
         //features
         printf("FEATURE_AIMBOT_ON\t\t\t\t\t%s\n", FEATURE_AIMBOT_ON ? "YES" : "NO");
         printf("FEATURE_SENSE_ON\t\t\t\t\t%s\n", FEATURE_SENSE_ON ? "YES" : "NO");
+        printf("FEATURE_LOBA_ON\t\t\t\t\t%s\n", FEATURE_LOBA_ON ? "YES" : "NO");
         printf("FEATURE_TRIGGERBOT_ON\t\t\t\t\t%s\n", FEATURE_TRIGGERBOT_ON ? "YES" : "NO");
         printf("FEATURE_NORECOIL_ON\t\t\t\t\t%s\n", FEATURE_NORECOIL_ON ? "YES" : "NO");
         printf("FEATURE_RADAR_ON\t\t\t\t\t%s\n", FEATURE_RADAR_ON ? "YES" : "NO");

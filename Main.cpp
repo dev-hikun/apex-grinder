@@ -6,11 +6,10 @@ int main() {
     int prevRadarSize;
     bool newRadarSize;
     int prevRadarPos;
-    int secCounter;
 
     //basic checks
-    if (getuid()) { std::cout << "[ ERROR ] Run program using as root (sudo)\n" << std::flush; return -1; }
-    if (mem::GetPID() == 0) { std::cout << "[ ERROR ] Game not found (using r5apex.exe). Open the game first!\n" << std::flush; return -1; }
+    if (getuid()) { std::cout << "[ \033[31mERROR\033[0m ] Run program using as \033[1mroot\033[0m (sudo)\n" << std::flush; return -1; }
+    if (mem::GetPID() == 0) { std::cout << "[ \033[31mERROR\033[0m ] Game not found (using r5apex.exe). Open the game first!\n" << std::flush; return -1; }
 
     //create basic objects
     XDisplay* display = new XDisplay();
@@ -56,12 +55,7 @@ int main() {
             //read level and make sure it is playable
             level->readFromMemory();
             if (!level->playable) {
-                //printf("[ INFO  ] Not in game! Sleeping 10 seconds...\n");
-                secCounter = secCounter + 10;
-                std::cout << "\r" 
-                    <<  "[ INFO  ] Player in Lobby - Waiting for the game to start...                                "
-                    << std::flush;
-                std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+                throw std::invalid_argument("Player in Lobby");
                 continue;
             }
 
@@ -107,38 +101,48 @@ int main() {
 
             //print loop info every now and then
             if (counter % 500 == 0) {
-                if (processingTime >= 20) {
+                if (processingTime <= 20) {
                     std::cout << "\r" 
-                        <<  "[ INFO  ] [" 
-                        << std::setw(4) << counter << "] \033[32mGAME STARTED\033[0m - Processing Time: \033[31m" 
-                        << std::setw(2) << processingTime << "ms\033[0m                                               "
+                        <<  "[ \033[32mINFO\033[0m  ] [" 
+                        << std::setw(4) << counter << "] \033[32mGAME STARTED\033[0m - Processing Time: \033[32m" 
+                        << std::setw(2) << processingTime << "ms\033[0m"
+                        << "                                    "
+                        << std::flush;
+                } else if (processingTime > 20 && processingTime < 100) {
+                    std::cout << "\r" 
+                        <<  "[ \033[32mINFO\033[0m  ] [" 
+                        << std::setw(4) << counter << "] \033[32mGAME STARTED\033[0m - Processing Time: \033[33m" 
+                        << std::setw(2) << processingTime << "ms\033[0m"
+                        << "                                    "
                         << std::flush;
                 } else {
-                        std::cout << "\r" 
-                        <<  "[ INFO  ] [" 
-                        << std::setw(4) << counter << "] \033[32mGAME STARTED\033[0m - Processing Time: \033[32m" 
-                        << std::setw(2) << processingTime << "ms\033[0m                                               "
+                    std::cout << "\r" 
+                        <<  "[ \033[32mINFO\033[0m  ] [" 
+                        << std::setw(4) << counter << "] \033[32mGAME STARTED\033[0m - Processing Time: \033[31m" 
+                        << std::setw(2) << processingTime << "ms\033[0m"
+                        << "                                    "
                         << std::flush;
                 }
             }
             //update counter
             counter = (counter < 1000) ? ++counter : counter = 0;
+            if (getuid()) { std::cout << "[ \033[31mERROR\033[0m ] Game closed. Exiting..." << std::flush; exit(-1); }
         }
         catch (std::invalid_argument& e) {
                 std::cout << "\r" 
-                    << "[ INFO  ] " << e.what() << " - Waiting for the game to start...                                         "
+                    << "[ \033[32mINFO\033[0m  ] " << e.what() << " - \033[36;1;5mWaiting for the game to start...\033[0m"
+                    << "                             "
                     << std::flush;
                 std::this_thread::sleep_for(std::chrono::seconds(5));
 
         }
         catch (...) {
-            //printf("\n[ ERROR ] Unknown Error - Sleeping... \n");
             std::cout << "\r" 
-                    << "[ ERROR ] Unknown Error - Sleeping...                                                "
+                    << "[ \033[31mERROR\033[0m ] \033[31;1;5mUnknown Error\033[0m"
+                    << "                                                                  "
                     << std::flush;
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
     }
-
 }
 

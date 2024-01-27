@@ -231,7 +231,7 @@ struct Player {
         return level + ((m_xp - levels[arraySize - 1] + 1) / 18000);
     }
 
-    void setCustomGlow(int health, bool isVisible, bool isSameTeam)
+    void setCustomGlow(ConfigLoader* cl, int health, bool isVisible, bool isSameTeam)
     {
         static const int contextId = 0; // Same as glow enable
         long basePointer = base;
@@ -276,11 +276,22 @@ struct Player {
         }
         
         //item Glow
-        for (int highlightId = 30; highlightId < 40; highlightId++) {
-        const GlowMode newGlowMode = { 137,0,0,127 };
-        const GlowMode oldGlowMode = mem::Read<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0);
-        if (newGlowMode != oldGlowMode)
-            mem::Write<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
+        if (cl->FEATURE_LOBA_ON) {
+            for (int highlightId = 30; highlightId < 40; highlightId++) {
+                const GlowMode newGlowMode = { 137,0,0,127 };
+                const GlowMode oldGlowMode = mem::Read<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0);
+                
+                if (newGlowMode != oldGlowMode)
+                    mem::Write<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
+            } 
+        } else {
+            for (int highlightId = 30; highlightId < 40; highlightId++) {
+                const GlowMode newGlowMode = { 135,135,32,64 };
+                const GlowMode oldGlowMode = mem::Read<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0);
+                
+                if (newGlowMode != oldGlowMode)
+                mem::Write<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
+            } 
         }
     }
 

@@ -31,7 +31,7 @@ struct Sense {
                 player->setGlowEnable(1);
                 player->setGlowThroughWall(1);
                 int healthShield = player->currentHealth + player->currentShields;
-                player->setCustomGlow(healthShield, true, true);
+                player->setCustomGlow(cl, healthShield, true, true);
                 continue;
             }
             double distance = math::calculateDistanceInMeters(
@@ -45,18 +45,18 @@ struct Sense {
                 player->setGlowEnable(1);
                 player->setGlowThroughWall(1);
                 int healthShield = player->currentHealth + player->currentShields;
-                player->setCustomGlow(healthShield, true, false);
+                player->setCustomGlow(cl, healthShield, true, false);
             } 
             if (!player->visible && !player->knocked && distance < senseMaxRange){
                 player->setGlowEnable(1);
                 player->setGlowThroughWall(1);  
                 int healthShield = player->currentHealth + player->currentShields; 
-                player->setCustomGlow(healthShield, true, false);
+                player->setCustomGlow(cl, healthShield, true, false);
             } 
             else if (distance < senseMaxRangeOverWall) {
                 player->setGlowEnable(1);
                 player->setGlowThroughWall(1);
-                player->setCustomGlow(0, false, false);
+                player->setCustomGlow(cl, 0, false, false);
             } else if (player->getGlowEnable() == 1 && player->getGlowThroughWall() == 1) {
                 player->setGlowEnable(0);
                 player->setGlowThroughWall(0);

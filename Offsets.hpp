@@ -1,18 +1,18 @@
 #pragma once
-// GameVersion=v3.0.54.31
-// Updated 1/19/2024
+// GameVersion=v3.0.55.37
+// Updated 1/26/2024
 
 // Core
 constexpr long OFF_REGION = 0x140000000;                      //[Static]->Region
-constexpr long OFF_LEVEL = 0x16d6ab0;                         //[Miscellaneous]->LevelName
-constexpr long OFF_LOCAL_PLAYER = 0x21615d8;                  //[Miscellaneous]->LocalPlayer
-constexpr long OFF_ENTITY_LIST = 0x1db2ed8;                   //[Miscellaneous]->cl_entitylist
+constexpr long OFF_LEVEL = 0x16d6ac0;                         //[Miscellaneous]->LevelName
+constexpr long OFF_LOCAL_PLAYER = 0x2161538;                  //[Miscellaneous]->LocalPlayer
+constexpr long OFF_ENTITY_LIST = 0x1db2e38;                   //[Miscellaneous]->cl_entitylist
     
 // Buttons
-constexpr long OFF_IN_ATTACK = 0x073cd740;                    //[Buttons]->in_attack
+constexpr long OFF_IN_ATTACK = 0x073cd6a0;                    //[Buttons]->in_attack
 constexpr long OFF_IN_JUMP = 0x073cd828;                      //[Buttons]->in_jump
-constexpr long OFF_IN_DUCK = 0x073cd920;                      //[Buttons]->in_duck
-constexpr long OFFSET_IN_FORWARD = 0x073cd670;                //[Buttons]->in_forward
+constexpr long OFF_IN_DUCK = 0x073cd8a0;                      //[Buttons]->in_duck
+constexpr long OFFSET_IN_FORWARD = 0x073cd5f0;                //[Buttons]->in_forward
 constexpr long OFFSET_TRAVERSAL_START_TIME = 0x2ac0;          //[Buttons]->m_traversalStartTime
 constexpr long OFFSET_TRAVERSAL_PROGRESS = 0x2abc;            //[Buttons]->m_traversalProgress
 constexpr long OFFSET_WALL_RUN_START_TIME = 0x3524;           //[Buttons]->m_wallRunStartTime
@@ -20,9 +20,9 @@ constexpr long OFFSET_WALL_RUN_CLEAR_TIME = 0x3528;           //[Buttons]->m_wal
     
 // Player
 constexpr long OFF_VIEW_MATRIX = 0x11a350;                    //[RecvTable.DT_Player]->ViewMatrix
-constexpr long OFF_VIEW_RENDER = 0x73cc460;                   //[RecvTable.DT_Player]->ViewRender
+constexpr long OFF_VIEW_RENDER = 0x73cc3e0;                   //[RecvTable.DT_Player]->ViewRender
 constexpr long OFF_ZOOMING = 0x1b91;                          //[RecvTable.DT_Player]->m_bZooming
-constexpr long OFF_LOCAL_ORIGIN = 0x017c;                     //[DataMap.CBaseViewModel]->m_vecAbsOrigin
+constexpr long OFF_LOCAL_ORIGIN = 0x0188;                     //[DataMap.CBaseViewModel]->m_vecAbsOrigin
 constexpr long OFF_ABSVELOCITY = 0x0170;                      //[DataMap.C_BaseEntity]->m_vecAbsVelocity
 constexpr long OFF_TEAM_NUMBER = 0x030c;                      //[RecvTable.DT_BaseEntity]->m_iTeamNum
 constexpr long OFF_CURRENT_HEALTH = 0x02fc;                   //[RecvTable.DT_BaseEntity]->m_iHealth
@@ -34,13 +34,13 @@ constexpr long OFF_BLEEDOUT_STATE = 0x26a0;                   //[RecvTable.DT_Pl
 constexpr long OFF_LAST_VISIBLE_TIME = 0x194d + 0x3;          //[RecvTable.DT_BaseCombatCharacter]->m_hudInfo_visibilityTestAlwaysPasses + 0x3
 constexpr long OFF_LAST_AIMEDAT_TIME = 0x194d + 0x3 + 0x8;    //[RecvTable.DT_BaseCombatCharacter]->m_hudInfo_visibilityTestAlwaysPasses + 0x3 + 0x8
 constexpr long OFF_VIEW_ANGLES = 0x24f4 - 0x14;               //[DataMap.C_Player]-> m_ammoPoolCapacity - 0x14
-constexpr long OFF_PUNCH_ANGLES = 0x23f8;                     //[?]->m_currentFrameLocalPlayer.m_vecPunchWeapon_Angle
+constexpr long OFF_PUNCH_ANGLES = 0x0040;                     //[?]->m_currentFrameLocalPlayer.m_vecPunchWeapon_Angle
 constexpr long OFFSET_BREATH_ANGLES = (OFF_VIEW_ANGLES - 0x10);
 constexpr long OFF_STUDIOHDR = 0xfb0;                         //[Miscellaneous]->CBaseAnimating!m_pStudioHdr
 constexpr long OFF_BONES = 0x0d60 + 0x48;                     //m_nForceBone + 0x48
 constexpr long OFF_CAMERAORIGIN = 0x1e90;                     //[Miscellaneous]->CPlayer!camera_origin
 constexpr long OFF_MODELNAME = 0x0030;                        //m_ModelName     
-constexpr long OFF_NAMELIST = 0xc5ea050;                      //[Miscellaneous]->NameList
+constexpr long OFF_NAMELIST = 0xc5e9fd0;                      //[Miscellaneous]->NameList
 constexpr long OFF_YAW = 0x21fc - 0x8;                        //m_currentFramePlayer.m_ammoPoolCount - 0x8
 constexpr long OFF_NAMEINDEX = 0x38;                          //nameIndex
 
@@ -62,4 +62,4 @@ constexpr long OFF_GLOW_ENABLE = 0x26c;                       //[DT_HighlightSet
 constexpr long OFF_GLOW_THROUGH_WALL = 0x28c;                 //[DT_HighlightSettings].?
 constexpr long OFF_GLOW_FIX = 0x268;
 constexpr long OFF_GLOW_HIGHLIGHT_ID = 0x28C;                 //[DT_HighlightSettings].m_highlightServerActiveStates
-constexpr long OFF_GLOW_HIGHLIGHTS = 0xB93E050;
+constexpr long OFF_GLOW_HIGHLIGHTS = 0xB93DFD0;
