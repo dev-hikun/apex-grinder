@@ -277,7 +277,7 @@ struct Player {
         
         //item Glow
         if (cl->FEATURE_LOBA_ON) {
-            for (int highlightId = 30; highlightId < 40; highlightId++) {
+            for (int highlightId = 34; highlightId < 40; highlightId++) {
                 const GlowMode newGlowMode = { 137,0,0,127 };
                 const GlowMode oldGlowMode = mem::Read<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0);
                 
@@ -285,7 +285,7 @@ struct Player {
                     mem::Write<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
             } 
         } else {
-            for (int highlightId = 30; highlightId < 40; highlightId++) {
+            for (int highlightId = 34; highlightId < 40; highlightId++) {
                 const GlowMode newGlowMode = { 135,135,32,64 };
                 const GlowMode oldGlowMode = mem::Read<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0);
                 

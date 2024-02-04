@@ -36,10 +36,10 @@ struct Radar {
         this->localPlayer = localPlayer;
         this->players = players;
         
-	radarDestroyed = false;	
-	createRootWindow();
-	
-	if (cl->SCREEN_LEFT_WIDTH > 0) cl->SCREEN_WIDTH = cl->SCREEN_WIDTH + cl->SCREEN_LEFT_WIDTH;
+        radarDestroyed = false;	
+        createRootWindow();
+        
+        if (cl->SCREEN_LEFT_WIDTH > 0) cl->SCREEN_WIDTH = cl->SCREEN_WIDTH + cl->SCREEN_LEFT_WIDTH;
     }
 
     void createRootWindow() {

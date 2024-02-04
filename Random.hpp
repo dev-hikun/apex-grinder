@@ -29,9 +29,9 @@ public:
             static bool startSg = false;
             static float traversalProgressTmp = 0.0;
  
-            float worldtime = mem::Read<float>(m_localPlayer->base + OFFSET_TIME_BASE); // Current time
-            float traversalStartTime = mem::Read<float>(m_localPlayer->base + OFFSET_TRAVERSAL_START_TIME); // Time to start wall climbing
-            float traversalProgress = mem::Read<float>(m_localPlayer->base + OFFSET_TRAVERSAL_PROGRESS); // Wall climbing, if > 0.87 it is almost over.
+            float worldtime = mem::Read<float>(m_localPlayer->base + OFF_TIME_BASE); // Current time
+            float traversalStartTime = mem::Read<float>(m_localPlayer->base + OFF_TRAVERSAL_START_TIME); // Time to start wall climbing
+            float traversalProgress = mem::Read<float>(m_localPlayer->base + OFF_TRAVERSAL_PROGRESS); // Wall climbing, if > 0.87 it is almost over.
             auto HangOnWall = -(traversalStartTime - worldtime);
  
             if (HangOnWall > 0.1 && HangOnWall < 0.12)
@@ -48,7 +48,7 @@ public:
             {
                 //printf ("sg Press jump\n");
                 mem::Write<int>(OFF_REGION + OFF_IN_JUMP + 0x8, 5);
-                while (mem::Read<float>(m_localPlayer->base + OFFSET_TIME_BASE) - startjumpTime < 0.011);
+                while (mem::Read<float>(m_localPlayer->base + OFF_TIME_BASE) - startjumpTime < 0.011);
                 {
                     mem::Write<int>(OFF_REGION + OFF_IN_DUCK + 0x8, 6);
                     std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -64,10 +64,10 @@ public:
         int wallJumpNow = 0;
  
         static float onWallTmp = 0;
-        float onWall = mem::Read<float>(m_localPlayer->base + OFFSET_WALL_RUN_START_TIME);
+        float onWall = mem::Read<float>(m_localPlayer->base + OFF_WALL_RUN_START_TIME);
         if (onWall > onWallTmp + 0.1) // 0.1
         {
-            if (mem::Read<int>(OFF_REGION + OFFSET_IN_FORWARD) == 0)
+            if (mem::Read<int>(OFF_REGION + OFF_IN_FORWARD) == 0)
             {
                 wallJumpNow = 1;
                 //printf("wall jump Press jump\n");
@@ -79,10 +79,10 @@ public:
         onWallTmp = onWall;
  
         static float onEdgeTmp = 0;
-        float onEdge = mem::Read<float>(m_localPlayer->base + OFFSET_TRAVERSAL_PROGRESS);
+        float onEdge = mem::Read<float>(m_localPlayer->base + OFF_TRAVERSAL_PROGRESS);
         if (onEdge > onEdgeTmp + 0.1) // 0.1
         {
-            if (mem::Read<int>(OFF_REGION + OFFSET_IN_FORWARD) == 0)
+            if (mem::Read<int>(OFF_REGION + OFF_IN_FORWARD) == 0)
             {
                 wallJumpNow = 2;
                 //printf("wall jump onEdge Press jump\n");
@@ -174,6 +174,8 @@ public:
                         << spectatorcount << " SPECTATOR(S)\033[0m: " 
                         << spectatorsname << "                                                    "
                         << std::flush;
+
+                    //mem::Write<int>(m_localPlayer->base + OFF_SKIN, skinID+1);
                 }
             }              
         }      
@@ -186,8 +188,8 @@ public:
         if(m_localPlayer->dead) return;
         long wephandle = mem::Read<long>(m_localPlayer->base + OFF_WEAPON_HANDLE);
         wephandle &= 0xffff;
-        long wep_entity = m_localPlayer->weaponEntity;
-        float curTime = mem::Read<float>(m_localPlayer->base + OFFSET_TIME_BASE);
+        long weapon_entity = m_localPlayer->weaponEntity;
+        float curTime = mem::Read<float>(m_localPlayer->base + OFF_TIME_BASE);
         float endTime = curTime +5.5;
         std::map<int, std::vector<int>> weaponSkinMap;
 
@@ -230,13 +232,13 @@ public:
         weaponSkinMap[WEAPON_THERMITE_GRENADE] = { 2 }; 
 
         if (m_configLoader->FEATURE_SKINCHANGER_ON){
-            int waponIndex = mem::Read<int>(wep_entity + OFF_WEAPON_INDEX);
-            if (weaponSkinMap.count(waponIndex) == 0) return;
-            int skinID = weaponSkinMap[waponIndex][0];
-            //printf("Weapon: %s Activated Skin ID: %d \n", WeaponName(waponIndex).c_str(), skinID);  
+            int weaponIndex = mem::Read<int>(weapon_entity + OFF_WEAPON_INDEX);
+            if (weaponSkinMap.count(weaponIndex) == 0) return;
+            int skinID = weaponSkinMap[weaponIndex][0];
+            //printf("Weapon: %s Activated Skin ID: %d \n", WeaponName(weaponIndex).c_str(), skinID);  
             mem::Write<int>(m_localPlayer->base + OFF_SKIN, skinID+1);
-            mem::Write<int>(wep_entity + OFF_SKIN, skinID);
-            curTime = mem::Read<float>(m_localPlayer->base + OFFSET_TIME_BASE);
+            mem::Write<int>(weapon_entity + OFF_SKIN, skinID);
+            curTime = mem::Read<float>(m_localPlayer->base + OFF_TIME_BASE);
         }                    
     }
 };
