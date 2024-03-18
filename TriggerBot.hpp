@@ -1,4 +1,7 @@
 #pragma once
+
+#include "./Utils/Modules.hpp"
+
 struct TriggerBot {
     ConfigLoader* cl;
     XDisplay* display;
@@ -17,6 +20,7 @@ struct TriggerBot {
     }
 
     void shootAtEnemy(int counter) {
+        if (!localPlayer->inZoom) return;
         if (!cl->FEATURE_TRIGGERBOT_ON) return;
         if (!localPlayer->isCombatReady()) return;
 
@@ -24,23 +28,39 @@ struct TriggerBot {
         int weaponId = localPlayer->weaponIndex;
         // printf("Last weapon held: %s id: %d \n", WeaponName(weaponId).c_str(), weaponId);
         if (
-            //weaponId != WEAPON_KRABER &&
-            //weaponId != WEAPON_HEMLOCK &&
-            //weaponId != WEAPON_NEMESIS &&
-            //weaponId != WEAPON_PROWLER &&
-            //weaponId != WEAPON_THROWING_KNIFE &&
-            weaponId != WEAPON_P2020 &&
+            // shotgun
             weaponId != WEAPON_MOZAMBIQUE &&
             weaponId != WEAPON_EVA8 &&
             weaponId != WEAPON_PEACEKEEPER &&
             weaponId != WEAPON_MASTIFF &&
+            // light
+            weaponId != WEAPON_P2020 &&
+            weaponId != WEAPON_RE45 &&
+            weaponId != WEAPON_ALTERNATOR &&
+            weaponId != WEAPON_R99 &&
+            weaponId != WEAPON_R301 &&
+            weaponId != WEAPON_SPITFIRE &&
+            weaponId != WEAPON_G7 &&
+            // heavy
+            weaponId != WEAPON_CAR &&
+            weaponId != WEAPON_RAMPAGE &&
+            weaponId != WEAPON_3030 &&
+            weaponId != WEAPON_HEMLOCK &&
+            weaponId != WEAPON_FLATLINE &&
+            // energy
+            weaponId != WEAPON_NEMESIS &&
+            weaponId != WEAPON_VOLT &&
+            weaponId != WEAPON_TRIPLE_TAKE &&
+            weaponId != WEAPON_LSTAR &&
+            weaponId != WEAPON_DEVOTION &&
+            // weaponId != WEAPON_HAVOC &&
+            //weaponId != WEAPON_THROWING_KNIFE &&
             weaponId != WEAPON_WINGMAN &&
             weaponId != WEAPON_LONGBOW &&
-            weaponId != WEAPON_SENTINEL &&
-            weaponId != WEAPON_G7 &&
-            weaponId != WEAPON_3030 &&
-            weaponId != WEAPON_TRIPLE_TAKE &&
-            weaponId != WEAPON_BOCEK
+            weaponId != WEAPON_PROWLER &&
+            weaponId != WEAPON_SENTINEL 
+            //weaponId != WEAPON_KRABER &&
+            // weaponId != WEAPON_BOCEK
             )return;
 
         //max range changes based on if we are zoomed in or not

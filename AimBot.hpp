@@ -1,4 +1,8 @@
 #pragma once
+
+#include "./Utils/Modules.hpp"
+#include "./Utils/InputManager.hpp"
+
 struct AimBot {
     ConfigLoader* cl;
     XDisplay* display;
@@ -55,6 +59,8 @@ struct AimBot {
         int weaponId = localPlayer->weaponIndex;
         bool weaponDiscarded = localPlayer->weaponDiscarded;
 
+        bool activatedByAimBind = InputManager::isKeyDownOrPress(Modules::Aimbot::AimBind);
+
         //only these weapons will use aimbot
         bool weaponCanBeAimbotted = (
             // Light Weapons
@@ -64,20 +70,20 @@ struct AimBot {
             weaponId == WEAPON_R99 ||
             weaponId == WEAPON_R301 ||
             weaponId == WEAPON_SPITFIRE ||
-            //weaponId == WEAPON_G7 ||
+            weaponId == WEAPON_G7 ||
 
             // Heavy Weapons
             weaponId == WEAPON_FLATLINE ||
             weaponId == WEAPON_HEMLOCK ||
-            //weaponId == WEAPON_P3030 ||
+            weaponId == WEAPON_3030 ||
             weaponId == WEAPON_RAMPAGE ||
             weaponId == WEAPON_CAR ||
 
             // Shotgun Weapons      
             weaponId == WEAPON_MOZAMBIQUE ||
             weaponId == WEAPON_EVA8 ||
-            //weaponId == WEAPON_PEACEKEEPER ||
-            //weaponId == WEAPON_MASTIFF ||
+            weaponId == WEAPON_PEACEKEEPER ||
+            weaponId == WEAPON_MASTIFF ||
 
             // Energy Weapons
             weaponId == WEAPON_HAVOC ||
@@ -85,25 +91,25 @@ struct AimBot {
             weaponId == WEAPON_LSTAR ||
             weaponId == WEAPON_TRIPLE_TAKE ||
             weaponId == WEAPON_VOLT ||
-            //weaponId == WEAPON_NEMESIS ||
+            weaponId == WEAPON_NEMESIS ||
 
             // Sniper Weapons
             //weaponId == WEAPON_LONGBOW ||
-            //weaponId == WEAPON_CHARGE_RIFLE ||
-            //weaponId == WEAPON_SENTINEL ||
+            // weaponId == WEAPON_CHARGE_RIFLE ||
+            weaponId == WEAPON_SENTINEL ||
 
             // RED Weapons
             weaponId == WEAPON_WINGMAN ||
             weaponId == WEAPON_PROWLER ||
             weaponId == WEAPON_BOCEK ||
             //weaponId == WEAPON_KRABER ||
-            weaponId == WEAPON_THROWING_KNIFE ||
+            // weaponId == WEAPON_THROWING_KNIFE ||
             weaponId == BUSTER_SWORD_R2R5
             );
 
         bool activatedByAttackingAndIsAttacking = cl->AIMBOT_ACTIVATED_BY_ATTACK && localPlayer->inAttack;
         bool activatedByADSAndIsADSing = cl->AIMBOT_ACTIVATED_BY_ADS && localPlayer->inZoom;
-        bool activatedByButtonAndButtonIsDown = cl->AIMBOT_ACTIVATED_BY_BUTTON != "" && display->keyDown(cl->AIMBOT_ACTIVATED_BY_BUTTON);
+        bool activatedByButtonAndButtonIsDown = cl->AIMBOT_ACTIVATED_BY_BUTTON != "" && activatedByAimBind;
         bool active = aimbotIsOn
             && combatReady
             && !weaponDiscarded

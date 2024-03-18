@@ -90,8 +90,10 @@ int main() {
             randyRandom->printLevels();
             randyRandom->quickTurn();
             randyRandom->superGlide();
-            randyRandom->spectatorView();
-            randyRandom->SkinChange();
+            if (counter % 1000 == 0) {
+                randyRandom->spectatorView();
+            }
+            // randyRandom->SkinChange();
 
             //check how fast we completed all the processing and if we still have time left to sleep
             int processingTime = static_cast<int>(util::currentEpochMillis() - startTime);
