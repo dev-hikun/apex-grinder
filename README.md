@@ -33,12 +33,12 @@ CREDITS:
 
 ### 1. Download:
 ```
-git clone https://github.com/GitDev28/grinder-CG.git
+git clone https://github.com/dev-hikun/apex-grinder
 ```
 
 ### 2. Get inside the folder
 ```
-cd grinder-CG
+cd apex-grinder
 ```
 
 ### 3. Compile the program (The below is a single word command that you need to type into terminal and hit Enter):
@@ -55,9 +55,3 @@ Open steam and start apex and wait for it to fully start
 ```
 sudo ./a.out
 ```
-
-### 6. Profit
-```
-Unlimited powaaaaaaaaaa!
-```
-![alt text](https://cdn.vox-cdn.com/thumbor/PYVJRRXPhua4a3I2X3n49AIgPZw=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19542877/star_wars6_movie_screencaps.com_13433.jpg)
